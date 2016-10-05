@@ -4,15 +4,11 @@
 
     // access token to be put into header:
     // `Authorization: bearer ${YOUR_ACCESS_TOKEN}`
-
-
-
 /*
 
 
-
 // Get All Surveys
- curl -i -X GET -H "Authorization:bearer yYwp9azeJbGXnomGesy1krzGPyRbnsr4BM4Yd-ST90OvAjfEDTRKjJwWB4uhIehGgsBFbEq6mm2UmY7LNyp1hJcGsq3-YQsSb8otm310Sf9tVL2dNaVzxSIEASyJRUsalyAJYe2HpHM2FuoS8KjOGM6tZsguuGJ1bO2lC7yFzjk=" https://api.surveymonkey.net/v3/surveys?api_key=seae5srhe453qquwmt3hz6at
+ curl -i -X GET -H "Authorization:bearer <ACCESS_TOKEN>" https://api.surveymonkey.net/v3/surveys?api_key=<API_KEY>
 
  HTTP/1.1 200 OK
  Content-Type: application/json; charset=UTF-8
@@ -26,6 +22,6 @@
 
  {"per_page":50,"total":1,"data":[{"href":"https:\/\/api.surveymonkey.net\/v3\/surveys\/85708120","id":"85708120","title":"Digital Inclusion"}],"page":1,"links":{"self":"https:\/\/api.surveymonkey.net\/v3\/surveys\/?page=1&per_page=50"}}%
 
- curl -i -X GET -H "Authorization:bearer ELPAnZ3HepHh934ONgDjen8NarE-ztqTusH6mRt07jU6hXhsxAVyaqkb6n9Y5K4.3r3oWVaBauE2tOqIxARm7dVZmX638Xvvsk7Uss1dcIGHZIOZtBebH.DHPWqgQdvZYAmcJ4AV3FWjIlimcpb5yurN849BMcgczZmSNFFEtQJICWv.6b8Rnbp3TWVoXYNn" https://api.surveymonkey.net/v3/surveys/85708120/details?api_key=vsgvd6n7nb3c5cbb58u3w3e8
+ curl -i -X GET -H "Authorization:bearer <ACCESS_TOKEN>" https://api.surveymonkey.net/v3/surveys/85708120/details?api_key=<API_KEY>
 
  */
