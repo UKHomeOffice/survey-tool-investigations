@@ -1,0 +1,27 @@
+// Connect to the API
+    // just use the access token
+    // can use oauth2 later if needed
+
+    // access token to be put into header:
+    // `Authorization: bearer ${YOUR_ACCESS_TOKEN}`
+/*
+
+
+// Get All Surveys
+ curl -i -X GET -H "Authorization:bearer <ACCESS_TOKEN>" https://api.surveymonkey.net/v3/surveys?api_key=<API_KEY>
+
+ HTTP/1.1 200 OK
+ Content-Type: application/json; charset=UTF-8
+ Date: Tue, 04 Oct 2016 14:14:36 GMT
+ Link: <https://api.surveymonkey.net/v3/surveys/?page=1&per_page=50>; rel="self"
+ Server: nginx/1.4.6 (Ubuntu)
+ SM-Request-ID: be2d2b02-0961-4cdf-8b95-27136ede3a2b
+ X-Mashery-Responder: prod-j-worker-us-west-1b-62.mashery.com
+ Content-Length: 236
+ Connection: keep-alive
+
+ {"per_page":50,"total":1,"data":[{"href":"https:\/\/api.surveymonkey.net\/v3\/surveys\/85708120","id":"85708120","title":"Digital Inclusion"}],"page":1,"links":{"self":"https:\/\/api.surveymonkey.net\/v3\/surveys\/?page=1&per_page=50"}}%
+
+ curl -i -X GET -H "Authorization:bearer <ACCESS_TOKEN>" https://api.surveymonkey.net/v3/surveys/85708120/details?api_key=<API_KEY>
+
+ */
