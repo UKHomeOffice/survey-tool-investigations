@@ -16,7 +16,7 @@ let questionsList = getQuestions(surveyData.pages);
 let filterQuestions = _.map(questionsList, function(question){
     return {
         qid: question.id,
-        label: mapHeading(question.headings),
+        label: (question.headings),
         answers: (question.answers.choices)
     }
 });
