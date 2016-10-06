@@ -1,0 +1,41 @@
+[
+  {
+    "qid":"1023426088",
+    "label":"Have they ever used the internet?",
+    "answers":[
+      {"aid":"10635421733","label":"Yes", "count": 12},
+      {"aid":"10635421738","label":"No", "count": 8}
+    ]
+  },
+  {
+    "qid":"1023341746",
+    "label":"Do they still use the internet?",
+    "answers":[
+      {"aid":"10634864634","label":"Yes", "count": 5},
+      {"aid":"10634864639","label":"No", "count": 7}
+    ]
+  },
+  {
+    "qid":"1023342927",
+    "label":"<strong>Do they want to be online?<\\/strong><br><br>For example, there are barriers stopping them being online, for example it's too expensive, they lack of confidence or aren't physically able",
+    "answers":[
+      {"aid":"10634872241","label":"Yes", "count": 2},
+      {"aid":"10634872243","label":"No", "count": 6}
+    ]
+  },
+  {
+    "qid":"1023944633",
+    "label":"<strong>Do they want to be online?<\\/strong><br><br>For example, there are barriers stopping them being online, for example it's too expensive, they lack of confidence or aren't physically able",
+    "answers":[
+      {"aid":"10638925679","label":"Yes", "count": 4},
+      {"aid":"10638925680","label":"No", "count": 3}
+    ]
+  },
+  {
+    "qid":"1023413060","label":"Do they like using the internet?",
+    "answers":[
+      {"aid":"10635334188","label":"Yes", "count": 2},
+      {"aid":"10635334190","label":"No", "count": 3}
+    ]
+  }
+]
