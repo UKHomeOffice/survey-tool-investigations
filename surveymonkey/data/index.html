@@ -1,0 +1,92 @@
+<html>
+<head>
+    <style type="text/css">
+        .bar {
+            fill: steelblue;
+        }
+
+        .axis text {
+            font: 10px sans-serif;
+        }
+
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .x.axis path {
+            display: none;
+        }
+
+    </style>
+    <script src="http://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+</head>
+
+<body>
+<svg class="chart"></svg>
+<script>
+
+var margin = {top: 40, right: 30, bottom: 30, left: 40},
+        width = 540 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+        .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+var chart = d3.select(".chart")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.json("./report_data.json", function(error, data) {
+
+    var question = data[0];
+
+    x.domain(question.answers.map(function(d) { return d.label; }));
+    y.domain([0, d3.max(question.answers, function(d) { console.log(d.count); return d.count; })]);
+
+    chart.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+    chart.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+    chart.selectAll(".bar")
+            .data(question.answers)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) { return x(d.label); })
+            .attr("y", function(d) { return y(d.count); })
+            .attr("height", function(d) { return height - y(d.count); })
+            .attr("width", x.rangeBand());
+
+    chart.append("text")
+            .attr("x", (width / 2))
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
+            .text(question.label);
+});
+
+</script>
+</body>
+
+</html>
