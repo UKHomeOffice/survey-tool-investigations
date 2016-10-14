@@ -16,9 +16,9 @@ let subResponse = require('./data/subsetResponse.json');
 // Choice id: 34809715 = Category 4
 
 let categoryLogic =
-    [{'34809714': 'category 3'}, {34809715: 'Category 1'},
-        {'34815817': 'Category 3'}, {34815818: 'Category 2'},
-        {'34811143': 'No Category'}, {34811144: 'Category 4'}];
+    [{'34809714': 'Category 3'}, {'34809715': 'Category 1'},
+        {'34815817': 'Category 3'}, {'34815818': 'Category 2'},
+        {'34811143': 'No Category'}, {'34811144': 'Category 4'}];
 let categoryIDs = [34809714, 34809715, 34815817, 34815818, 34811143,
     34811144];
 
@@ -87,7 +87,22 @@ function countRepeats(array) {
         a[k] = a[k] + 1;
 
     }
-    console.log(JSON.stringify(a, null, 2))
+    convertCat(a);
+}
+
+function convertCat(items) {
+    let convertedItems = {};
+
+    _.forEach(categoryLogic, function(val, key) {
+        let k = _.keys(val);
+        let v = _.values(val);
+        if (items[k]) {
+            convertedItems[v] = items[k];
+        }
+    });
+    console.log(convertedItems);
+
+
 }
 
 
