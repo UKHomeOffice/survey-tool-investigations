@@ -7,21 +7,20 @@ let pageSize = 10;
 let pageTotal;
 let noPages;
 let pageNumber = 1;
+let subResponse = require('./data/subsetResponse.json');
+
 // Choice id: 34809715 = Category 1
 // Choice id: 34815818 = Category 2
-// Choice id: 34809714 = Category 3 - Not used the internet but they want to (Willing & unable)
-// Choice id: 34815817 = Category 3 - Was online and they want to be (Willing & unable)
+// Choice id: 34809714 = Category 3a - Not used the internet but they want to (Willing & unable)
+// Choice id: 34815817 = Category 3b - Was online and they want to be (Willing & unable)
 // Choice id: 34809715 = Category 4
-let categoryLogic = [
-    {ID: 1017861 [{'34809714': 'Category 3: Willing & unable'}, {34809715: 'Category 1: Never have never will'}]},
-    {ID: 1017937 [{'34815817': 'Category 3: Willing & unable'}, {34815818: 'Category 2: Was online but no longer'}]},
-    {ID: 1017945 [{'34811143': 'No Category'}, {34811144: 'Category 4 Reluctantly online'}]}];
 
-//let categoryLogic = [
-//    [{'34809714': 'Category 3: Willing & unable'}, {34809715: 'Category 1: Never have never will'},
-//        {'34815817': 'Category 3: Willing & unable'}, {34815818: 'Category 2: Was online but no longer'},
-//        {'34811143': 'No Category'}, {34811144: 'Category 4 Reluctantly online'}]
-//];
+let categoryLogic =
+    [{'34809714': 'category 3'}, {34809715: 'Category 1'},
+        {'34815817': 'Category 3'}, {34815818: 'Category 2'},
+        {'34811143': 'No Category'}, {34811144: 'Category 4'}];
+let categoryIDs = [34809714, 34809715, 34815817, 34815818, 34811143,
+    34811144];
 
 
 let getOptions = function getOptions(currentPage) {
@@ -46,42 +45,49 @@ let getOptions = function getOptions(currentPage) {
 };
 
 function getResponses(array) {
-    return _.map(array, function(arrayItem){
-        return {responseId: arrayItem.id,
-         'questions': _.flatMap(arrayItem.pages, getQuestions)
-        }
+    let choiceData= {};
+
+    array.forEach(function(item) {
+
+        let itemId = item.id;
+        choiceData[itemId] = [];
+
+        item.pages.forEach(function(page) {
+           page.questions.forEach(function(question) {
+               question.answers.forEach(function(answer) {
+                 choiceData[itemId].push(answer.choice_id);
+               });
+           });
+        });
     });
+    getCategory(choiceData);
 }
 
-function getQuestions(page) {
-    return _.map(page.questions, breakUpQuestion);
+function getCategory(choiceData) {
+    let exitChoices = [];
+    _.forEach(choiceData, function(values, key){
+        _.forEach(values, function(value){
+          if (categoryIDs.indexOf(value) !== -1) {
+              exitChoices.push(value);
+          }
+        });
+    });
+    countRepeats(exitChoices);
 }
 
-function breakUpQuestion(question){
-    //let questionObj = {
-    //    qid: question.id,
-    //    label: question.title,
-    //    answers: question.answers
-    //};
+function countRepeats(array) {
+    let a = {};
 
-    //return _.map(categoryLogic, matchQuestion(categoryThing, question.id));
-    return _.map(categoryLogic, matchQuestion);
+    for (var i = 0; i < array.length; i++) {
+        let k = array[i];
+        if (!a[k]) {
+            a[k] = 0;
+        }
 
-    //let categoryNo = '';
-    //_.forEach(result, function(page) {
-    //    _.forEach(page.questions)
-    //    ...
-    //    ...
-    //    ..
-    //    categoryNo = '';
-    //})
+        a[k] = a[k] + 1;
 
-
-}
-
-function matchQuestion(cLogic, qid) {
-    console.log(cLogic.ID, qid);
-    //return cLogic.ID === qid;
+    }
+    console.log(JSON.stringify(a, null, 2))
 }
 
 
@@ -119,5 +125,7 @@ function getNoPages(pageTotal, pageSize){
 
 }
 
-request(getOptions(pageNumber), callback);
+(getResponses(subResponse));
+
+//request(getOptions(pageNumber), callback);
 
