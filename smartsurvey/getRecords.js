@@ -101,8 +101,6 @@ function convertCat(items) {
         }
     });
     console.log(convertedItems);
-
-
 }
 
 
