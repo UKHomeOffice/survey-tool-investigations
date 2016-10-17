@@ -35,7 +35,7 @@ function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         var info = JSON.parse(body);
         _.forEach(info, function(value) {
-            results.push(value.id);
+            results.push(value);
         });
 
     }
@@ -48,7 +48,7 @@ function callback(error, response, body) {
         request(getOptions(pageNumber), callback);
     }
     else {
-        console.log(results.length)
+        console.log(JSON.stringify(results))
     }
 }
 

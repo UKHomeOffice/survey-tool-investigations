@@ -7,7 +7,7 @@ let pageSize = 10;
 let pageTotal;
 let noPages;
 let pageNumber = 1;
-let subResponse = require('./data/subsetResponse.json');
+let subResponse = require('./data/response');
 
 // Choice id: 34809715 = Category 1
 // Choice id: 34815818 = Category 2
@@ -16,8 +16,8 @@ let subResponse = require('./data/subsetResponse.json');
 // Choice id: 34809715 = Category 4
 
 let categoryLogic =
-    [{'34809714': 'Category 3'}, {'34809715': 'Category 1'},
-        {'34815817': 'Category 3'}, {'34815818': 'Category 2'},
+    [{'34809714': 'Category 3a'}, {'34809715': 'Category 1'},
+        {'34815817': 'Category 3b'}, {'34815818': 'Category 2'},
         {'34811143': 'No Category'}, {'34811144': 'Category 4'}];
 let categoryIDs = [34809714, 34809715, 34815817, 34815818, 34811143,
     34811144];
@@ -100,7 +100,25 @@ function convertCat(items) {
             convertedItems[v] = items[k];
         }
     });
-    console.log(convertedItems);
+    mergeCat3(convertedItems);
+}
+
+function mergeCat3(categoryList) {
+    let output = {};
+
+    _.forEach(categoryList, function(value, key) {
+       if (key === 'Category 3a' || key ==='Category 3b') {
+            if (output['Category 3']) {
+                output['Category 3'] = output['Category 3'] + value;
+            } else {
+                output['Category 3'] = value;
+            }
+       } else {
+           output[key] = categoryList[key];
+       }
+    });
+    console.log(`categoryList ${JSON.stringify(categoryList)}`);
+    console.log(`output ${JSON.stringify(output)}`);
 }
 
 
