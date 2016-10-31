@@ -117,7 +117,7 @@ function mergeCat3(categoryList) {
            output[key] = categoryList[key];
        }
     });
-    console.log(`categoryList ${JSON.stringify(categoryList)}`);
+    //console.log(`categoryList ${JSON.stringify(categoryList)}`);
     console.log(`output ${JSON.stringify(output)}`);
 }
 
